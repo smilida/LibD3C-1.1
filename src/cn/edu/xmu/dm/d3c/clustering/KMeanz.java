@@ -20,7 +20,7 @@ public class KMeanz extends RandomizableClusterer implements NumberOfClustersReq
 	
 	private int m_NumClusters=0;
 	private Instances m_ClusterCentroids;
-	protected DistanceFunction m_DistanceFunction=new EuclideanDistance();	// Ä¬ÈÏÊ¹ÓÃÅ·À­¾àÀë
+	protected DistanceFunction m_DistanceFunction=new EuclideanDistance();	// é»˜è®¤ä½¿ç”¨æ¬§æ‹‰è·ç¦»
 	private boolean m_PreserveOrder=true;
 	private int m_Iterations=0;
 	private int m_MaxIterations=100;
@@ -38,9 +38,9 @@ public class KMeanz extends RandomizableClusterer implements NumberOfClustersReq
 	}
 	
 	/**
-	 * @param data ÑµÁ·Êı¾İ
-	 * @param chooseClassifiers	±£´æÉ¸Ñ¡Ö®ºóµÄ·ÖÀàÆ÷
-	 * @param correctRateArray	±£´æÉ¸Ñ¡ºóµÄ·ÖÀàÆ÷µÄ·ÖÀàÕıÈ·ÂÊ
+	 * @param data è®­ç»ƒæ•°æ®
+	 * @param chooseClassifiers	ä¿å­˜ç­›é€‰ä¹‹åçš„åˆ†ç±»å™¨
+	 * @param correctRateArray	ä¿å­˜ç­›é€‰åçš„åˆ†ç±»å™¨çš„åˆ†ç±»æ­£ç¡®ç‡
 	 * @throws Exception
 	 */
 	public void buildClusterer(Instances data,List<Integer> chooseClassifiers,List<Double> correctRateArray)throws Exception{
@@ -61,7 +61,7 @@ public class KMeanz extends RandomizableClusterer implements NumberOfClustersReq
 		else
 			initInstances=instances;
 		
-		//Ëæ»ú»ñµÃÆğÊ¼µÄ¾ÛÀàÖĞĞÄ
+		//éšæœºè·å¾—èµ·å§‹çš„èšç±»ä¸­å¿ƒ
 		for(int j=initInstances.numInstances()-1;j>=0;j--){
 			instIndex=RandomO.nextInt(j+1);
 			hk=new DecisionTableHashKey(initInstances.instance(instIndex),initInstances.numAttributes(),true);
@@ -92,7 +92,7 @@ public class KMeanz extends RandomizableClusterer implements NumberOfClustersReq
 			m_Iterations++;
 			converged=true;
 			
-			// ·Ö±ğ¶ÔÃ¿¸öÑù±¾¼ÆËãµ½M¸ö¾ÛÀàÖĞĞÄµÄ¾ÛÀà£¬Ñ¡Ôñ¾àÀë×î½üµÄ¾ÛÀàÖĞĞÄ×÷Îª¸ÃÑù±¾µÄ¾ÛÀàÀà±ğ
+			// åˆ†åˆ«å¯¹æ¯ä¸ªæ ·æœ¬è®¡ç®—åˆ°Mä¸ªèšç±»ä¸­å¿ƒçš„èšç±»ï¼Œé€‰æ‹©è·ç¦»æœ€è¿‘çš„èšç±»ä¸­å¿ƒä½œä¸ºè¯¥æ ·æœ¬çš„èšç±»ç±»åˆ«
 			for(i=0;i<instances.numInstances();i++){
 				Instance toCluster=instances.instance(i);
 				int newC=clusterProcessedInstance(toCluster);
@@ -101,7 +101,7 @@ public class KMeanz extends RandomizableClusterer implements NumberOfClustersReq
 				}
 				clusterAssignments[i]=newC;
 			}
-			//¸Ä±ä¾ÛÀàÖĞĞÄ
+			//æ”¹å˜èšç±»ä¸­å¿ƒ
 			m_ClusterCentroids=new Instances(instances,m_NumClusters);
 			
 			for(i=0;i<m_NumClusters;i++){
@@ -143,7 +143,7 @@ public class KMeanz extends RandomizableClusterer implements NumberOfClustersReq
 		selectClassifier(clusterAssignments,chooseClassifiers,correctRateArray);
 	}
 	
-	// ´ÓÃ¿¸ö¾ÛÀàÖĞĞÄÖĞÌôÑ¡·ÖÀàÕıÈ·ÂÊ×î¸ßµÄ·ÖÀàÆ÷²ÎÓëÏÂÒ»´ÎÑ­»·¼¯³ÉÑ¡Ôñ
+	// ä»æ¯ä¸ªèšç±»ä¸­å¿ƒä¸­æŒ‘é€‰åˆ†ç±»æ­£ç¡®ç‡æœ€é«˜çš„åˆ†ç±»å™¨å‚ä¸ä¸‹ä¸€æ¬¡å¾ªç¯é›†æˆé€‰æ‹©
 	public  void selectClassifier(int[] clusterAssignments,List<Integer> chooseClassifiers,List<Double> correctRateArray){
 		int i,j;
 		double correctRate;
@@ -163,7 +163,7 @@ public class KMeanz extends RandomizableClusterer implements NumberOfClustersReq
 		}
 	}
 	
-	//ÒÆ¶¯¾ÛÀàÖĞĞÄ
+	//ç§»åŠ¨èšç±»ä¸­å¿ƒ
 	protected double[] moveCentroid(int centroidIndex,Instances members/*,boolean updateClusterInfo*/){
 		double[] vals=new double[members.numAttributes()];
 		
@@ -197,7 +197,7 @@ public class KMeanz extends RandomizableClusterer implements NumberOfClustersReq
 		return members.instance(instanceID);
 	}
 	
-	//È·¶¨ÊµÀıÊôÓÚÄÄÒ»¸ö¾ÛÀà
+	//ç¡®å®šå®ä¾‹å±äºå“ªä¸€ä¸ªèšç±»
 	private int clusterProcessedInstance(Instance instance){
 		double minDist=Integer.MAX_VALUE;
 		int bestCluster=0;
@@ -217,7 +217,7 @@ public class KMeanz extends RandomizableClusterer implements NumberOfClustersReq
 		return bestCluster;
 	}
 	
-	//¸ù¾İĞÂ¾àÀë¹«Ê½µÃµ½Ã¿¸öÊµÀıÖ®¼äµÄ¾àÀë
+	//æ ¹æ®æ–°è·ç¦»å…¬å¼å¾—åˆ°æ¯ä¸ªå®ä¾‹ä¹‹é—´çš„è·ç¦»
 	protected  double myDistance(Instance first,Instance second){
 		int i;
 		int errorIntersect=0;
@@ -227,16 +227,16 @@ public class KMeanz extends RandomizableClusterer implements NumberOfClustersReq
 			}
 		}
 		
-//		// ÒÔÏÂÁ½ÖÖ·½Ê½¼ÆËã½á¹ûÒ»ÖÂ
-		return 1/(double)errorIntersect;
+//		// ä»¥ä¸‹ä¸¤ç§æ–¹å¼è®¡ç®—ç»“æœä¸€è‡´
+		return 1-(double)errorIntersect/first.numAttributes();
 	}
 	
-	//»ñµÃ¾ÛÀà¸öÊı
+	//è·å¾—èšç±»ä¸ªæ•°
 	public int numberOfClusters()throws Exception{
 		return m_NumClusters;
 	}
 	
-	//ÉèÖÃ¾ÛÀàÊı
+	//è®¾ç½®èšç±»æ•°
 	public void setNumClusters(int n)throws Exception{
 		if(n<=0){
 			throw new Exception("Number of clusters must be > 0");
