@@ -1,7 +1,7 @@
 # LibD3C_1.1
 Ensemble classifiers with a clustering and dynamic selection strategy and solve imbalance peoblem
 
-LibD3C_1.1 is the upgrades for the software LibD3C.LibD3C is an ensemble classifiers with a clustering and dynamic selection strategy.For the LibD3C_1.1 ,it could solve imbalance data.
+LibD3C_1.1 is the upgrades for the software LibD3C. LibD3C is an ensemble classifiers with a clustering and dynamic selection strategy.For the LibD3C_1.1 ,it could solve imbalance data.
 
 usage:
  
